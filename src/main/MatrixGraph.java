@@ -2,7 +2,7 @@ package main;
 
 import java.util.*;
 
-public class Graph<T> implements GraphInterface<T>{
+public class MatrixGraph<T> implements GraphInterface<T>{
     
     //edges[i][j] is true if there is an edge from node i to node j
     private boolean[][] edges;
@@ -13,7 +13,7 @@ public class Graph<T> implements GraphInterface<T>{
      * Constructor which defines a graph of n unconnected, null-labeled nodes
      * @param n The number of vertices in the graph
      */
-    public Graph(int n) {        
+    public MatrixGraph(int n) {        
         edges = new boolean[n][n]; // All values initially false        
         labels = (T[]) new Object[n]; // All values initially null
     }
