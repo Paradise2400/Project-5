@@ -21,17 +21,22 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     /**
      * Creates a number of unconnected, null-labeled vertex
      */
-    public void addVertices(int number){
+    public boolean addVertices(int number){
+        //cant remove them w/this
+        if (number <= 0) return false;
         //resize array by number
         edges = Arrays.copyOf(edges, edges.length + number);
         labels = Arrays.copyOf(labels, labels.length + number);
+        return true;
     }
 
     /**
      * Removes a vertex
      * @param vertex The index of the vertex
      */
-    public void removeVertex(int vertex){
+    public boolean removeVertex(int vertex){
+        //within bounds
+        if (vertex < edges.length) return false;
         //remove the vertex at index vertex
         boolean[][] tempEdges = new boolean[edges.length - 1][edges.length - 1];
         T[] tempLabels = (T[]) new Object[labels.length - 1];
@@ -60,6 +65,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         }
         edges = tempEdges;
         labels = tempLabels;
+        return true;
     }
 
     /**
@@ -76,18 +82,26 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * Add an edge from the source node to the target node, if one does not exist
      * @param source The node the new edge will be from
      * @param target The node the new edge will be to
+     * @return Whether the edge has been added
      */
-    public void addEdge(int source, int target){
+    public boolean addEdge(int source, int target){
+        if (source >= edges.length && target >= edges.length) return false;
+        if (edges[source][target] == true) return false;
         edges[source][target] = true;
+        return true;
     }
 
     /**
      * Remove the edge from the source node to the target node, if one does exist
      * @param source The node the edge to be removed is from
      * @param target The node the edge to be removed is to
+     * @return Whether the edge has been removed
      */
-    public void removeEdge(int source, int target){
+    public boolean removeEdge(int source, int target){
+        if (source >= edges.length && target >= edges.length) return false;
+        if (edges[source][target] == false) return false;
         edges[source][target] = false;
+        return true;
     }
 
     /**
@@ -124,9 +138,12 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * Set a vertex's label to a new label
      * @param vertex The vertex whose label will be set
      * @param newLabel The new label
+     * @return Whether the label has been set
      */
-    public void setLabel(int vertex, T newLabel){
+    public boolean setLabel(int vertex, T newLabel){
+        if (vertex < edges.length) return false;
         labels[vertex] = newLabel;
+        return true;
     }
 
     /**
