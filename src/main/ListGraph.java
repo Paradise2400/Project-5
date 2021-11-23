@@ -109,4 +109,23 @@ public class ListGraph<T> implements GraphInterface<T>{
     public int size(){
         return edges.length();
     }
+
+    /**
+     * toString method
+     * @return A string representation of the instance
+     */
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < edges.length(); i++) {
+            s += "Vertex " + (i + 1) + " has edges to ";
+            s += edges.getEntry(i).getEntry(0);
+            for (int k = 1; k < edges.getEntry(i).length(); k++) {
+                s += ", ";
+                s += (k + 1);
+                if (k == edges.getEntry(i).length() - 1) s += " and";
+            }
+            s += ".\n";
+        }
+        return s;
+    }
 }

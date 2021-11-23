@@ -154,4 +154,25 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         return labels.length;
     }
 
+    /**
+     * toString method
+     * @return A string representation of the instance
+     */
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < edges.length; i++) {
+            s += "Vertex " + (i + 1) + " has edges to ";
+            s += edges[i][0];
+            for (int k = 1; k < edges[i].length; k++) {
+                if (edges[i][k]) {
+                    s += ", ";
+                    s += (k + 1);
+                    if (k == edges[i].length - 1) s += " and";
+                }
+            }
+            s += ".\n";
+        }
+        return s;
+    }
+
 }
