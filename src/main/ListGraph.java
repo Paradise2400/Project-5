@@ -117,11 +117,11 @@ public class ListGraph<T> implements GraphInterface<T>{
     public String toString() {
         String s = "";
         for (int i = 0; i < edges.length(); i++) {
-            s += "Vertex " + (i + 1) + " has edges to ";
+            s += "Vertex " + i + " has edges to ";
             s += edges.getEntry(i).getEntry(0);
             for (int k = 1; k < edges.getEntry(i).length(); k++) {
                 s += ", ";
-                s += (k + 1);
+                s += k;
                 if (k == edges.getEntry(i).length() - 1) s += " and";
             }
             s += ".\n";
