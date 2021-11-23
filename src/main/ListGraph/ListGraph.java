@@ -1,6 +1,7 @@
 package main.ListGraph;
 
 import main.List.List;
+import main.GraphInterface;
 
 public class ListGraph<T> implements GraphInterface<T>{
 
@@ -117,11 +118,11 @@ public class ListGraph<T> implements GraphInterface<T>{
     public String toString() {
         String s = "";
         for (int i = 0; i < edges.length(); i++) {
-            s += "Vertex " + i + " has edges to ";
+            s += "Vertex " + getLabel(i) + " has edges to ";
             s += edges.getEntry(i).getEntry(0);
             for (int k = 1; k < edges.getEntry(i).length(); k++) {
                 s += ", ";
-                s += k;
+                s += getLabel(k);
                 if (k == edges.getEntry(i).length() - 1) s += " and";
             }
             s += ".\n";

@@ -1,6 +1,7 @@
 package main.MatrixGraph;
 
-import java.util.*;
+import java.util.Arrays;
+import main.GraphInterface;
 
 public class MatrixGraph<T> implements GraphInterface<T>{
     
@@ -8,6 +9,14 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     private boolean[][] edges;
     //labels[i] contains the label of node i
     private T[] labels;
+    private static final int DEFAULT_CAPACITY = 10;
+
+    /**
+     * Constructor which defines a graph of n unconnected, null-labeled nodes
+     */
+    public MatrixGraph() {        
+        this(DEFAULT_CAPACITY);
+    }
 
     /**
      * Constructor which defines a graph of n unconnected, null-labeled nodes
@@ -161,12 +170,12 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     public String toString() {
         String s = "";
         for (int i = 0; i < edges.length; i++) {
-            s += "Vertex " + i + " has edges to ";
+            s += "Vertex " + getLabel(i) + " has edges to ";
             s += edges[i][0];
             for (int k = 1; k < edges[i].length; k++) {
                 if (edges[i][k]) {
                     s += ", ";
-                    s += k;
+                    s += getLabel(k);
                     if (k == edges[i].length - 1) s += " and";
                 }
             }
