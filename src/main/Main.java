@@ -5,9 +5,9 @@ import main.MatrixGraph.*;
 
 public class Main {
     public static void main(String[] args) {
-        MatrixGraph graph1 = new MatrixGraph();
+        MatrixGraph<Character> graph1 = new MatrixGraph<Character>();
         createGraph(graph1);
-        ListGraph graph2 = new ListGraph();
+        ListGraph<Character> graph2 = new ListGraph<Character>();
         createGraph(graph2);
         System.out.println("Matrix Graph");
         System.out.println(graph1);
