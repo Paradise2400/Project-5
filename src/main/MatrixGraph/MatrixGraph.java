@@ -1,4 +1,4 @@
-package main;
+package main.MatrixGraph;
 
 import java.util.*;
 

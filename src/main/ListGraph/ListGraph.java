@@ -1,6 +1,6 @@
-package main;
+package main.ListGraph;
 
-import main.List.*;
+import main.List.List;
 
 public class ListGraph<T> implements GraphInterface<T>{
 
