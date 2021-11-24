@@ -45,6 +45,7 @@ public class ListGraph<T> implements GraphInterface<T>{
      * @return Whether the source has an edge to the target node
      */
     public boolean isEdge(int source, int target){
+        if (edges.getEntry(source) == null) return false;
         return edges.getEntry(source).contains(target);
     }
 
@@ -54,6 +55,8 @@ public class ListGraph<T> implements GraphInterface<T>{
      * @param target The node the new edge will be to
      */
     public boolean addEdge(int source, int target){
+        if (edges.getEntry(source) == null) return false;
+        if (edges.getEntry(target) == null) return false;
         if (!isEdge(source, target))
             return edges.getEntry(source).add(target);
         return false;

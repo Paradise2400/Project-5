@@ -1,5 +1,7 @@
 package main.List;
 
+import java.util.ArrayList;
+
 public class List<T> {
 
     Node<T> firstNode;
@@ -11,6 +13,7 @@ public class List<T> {
     }
 
     public List(T[] array) {
+        //go backwards because privateAdd() and add() add to front
         length = array.length;
         for (int i = length - 1; i >= 0; i--) {
             privateAdd(array[i]);
@@ -47,21 +50,29 @@ public class List<T> {
      * @param newEntry The new entry
      */
     private boolean privateAdd(T newEntry){
-        firstNode = new Node(newEntry, firstNode);
+        firstNode = new Node<T>(newEntry, firstNode);
         return true;
     }
 
     /**
      * Add a new entry T at position newPosition
-     * @param newPosition
-     * @param newEntry
+     * @param newPosition Position of the new entry
+     * @param newEntry The new entry
      */
     public boolean add(int newPosition, T newEntry){
         if (newPosition > length) return false;
+        if (newPosition < 0) return false;
         Node<T> posNode = firstNode;
-        for (int i = 0; i < newPosition; i++) posNode = posNode.next;
-        //posNode is now correct position
-        posNode = new Node(newEntry, posNode);
+        if (newPosition == length) {
+            //iterate to last node, make last.next
+            for (int i = 0; i < newPosition - 1; i++) posNode = posNode.next;
+            posNode.next = new Node<T>(newEntry, null);
+            length++;
+        } else {
+            for (int i = 0; i < newPosition; i++) posNode = posNode.next;
+            posNode = new Node<T>(newEntry, posNode);
+            length++;
+        }
         length++;
         return true;
     }
@@ -73,6 +84,7 @@ public class List<T> {
      */
     public T remove(int givenPosition){
         if (givenPosition >= length) return null;
+        if (givenPosition < 0) return null;
         Node<T> posNode = firstNode;
         for (int i = 0; i < givenPosition; i++) posNode = posNode.next;
         T retData = posNode.data;
@@ -88,6 +100,7 @@ public class List<T> {
      */
     public T replace(int givenPosition, T newEntry){
         if (givenPosition >= length) return null;
+        if (givenPosition < 0) return null;
         Node<T> posNode = firstNode;
         for (int i = 0; i < givenPosition; i++) posNode = posNode.next;
         T retData = posNode.data;
@@ -99,6 +112,7 @@ public class List<T> {
      * Clears the list of entries
      */
     public boolean clear(){
+        if (firstNode == null) return false;
         //leave it for the gc
         firstNode = null;
         return true;
@@ -111,6 +125,7 @@ public class List<T> {
      */
     public T getEntry(int givenPosition){
         if (givenPosition >= length) return null;
+        if (givenPosition < 0) return null;
         Node<T> posNode = firstNode;
         for (int i = 0; i < givenPosition; i++) posNode = posNode.next;
         return posNode.data;
@@ -130,18 +145,8 @@ public class List<T> {
         return false;
     }
 
-    /**
-     * Returns the list as an array
-     * @return The list as an array
-     */
-    public T[] toArray(){
-        T[] array = (T[]) new Object[length];
-        Node<T> curNode = firstNode;
-        for (int i = 0; i < length; i++) {
-            array[i] = curNode.data;
-            curNode = curNode.next;
-        }
-        return array;
+    public String toString() {
+        return "[" + firstNode + "]";
     }
     
     private class Node<G>{
@@ -150,6 +155,13 @@ public class List<T> {
         public Node(G data, Node<G> next) {
             this.data = data;
             this.next = next;
+        }
+        public String toString() {
+            if (next == null) {
+                return "" + data;
+            } else {
+                return data + ", " + next;
+            }
         }
     }
 }
