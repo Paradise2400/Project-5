@@ -17,30 +17,29 @@ public class Traversal {
             int min = 0;
             if(neighbors.length == 0)
                 vertexStack.pop();
-            else{
-                if(!visited.contains(graph.getLabel(neighbors[0])))
+            else {
+                if (!visited.contains(graph.getLabel(neighbors[0])))
                     min = neighbors[0];
-                else{
-                    for(int i = 0;i < neighbors.length;i++){
-                        if(!visited.contains(graph.getLabel(neighbors[i]))) {
+                else {
+                    for (int i = 0; i < neighbors.length; i++) {
+                        if (!visited.contains(graph.getLabel(neighbors[i]))) {
                             min = neighbors[i];
                             break;
                         }
                     }
                 }
-                for(int i = 1; i < neighbors.length; i++) {
+                for (int i = 1; i < neighbors.length; i++) {
                     if (neighbors[i] < min)
                         if (!visited.contains(graph.getLabel(neighbors[i])))
                             min = neighbors[i];
                 }
+                if (!visited.contains(graph.getLabel(min))) {
+                    neighbors = graph.neighbors(min);
+                    vertexStack.push(graph.getLabel(min));
+                    traversalOrder.enqueue(graph.getLabel(min));
+                } else
+                    vertexStack.pop();
             }
-            if(!visited.contains(graph.getLabel(min))){
-                neighbors = graph.neighbors(min);
-                vertexStack.push(graph.getLabel(min));
-                traversalOrder.enqueue(graph.getLabel(min));
-            }
-            else
-                vertexStack.pop();
             }
         return traversalOrder;
         }
