@@ -1,5 +1,5 @@
 package main.MatrixGraph;
 
-public class Traversal {
+public class MTraversal {
             
 }
