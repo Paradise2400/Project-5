@@ -20,12 +20,16 @@ public class Traversal {
                     if(!visited.contains(graph.getLabel(neighbors[i])))
                         min = neighbors[i];
             }
-            neighbors = graph.neighbors(min);
-            vertexStack.push(graph.getLabel(min));
-            traversalOrder.enqueue(graph.getLabel(min));
+            if(!visited.contains(graph.getLabel(min))){
+                neighbors = graph.neighbors(min);
+                vertexStack.push(graph.getLabel(min));
+                traversalOrder.enqueue(graph.getLabel(min));
+            }
+            else
+                vertexStack.pop();
             if(neighbors.length == 0)
                 vertexStack.pop();
-        }
+            }
         return traversalOrder;
         }
 }
