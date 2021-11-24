@@ -14,7 +14,17 @@ public class Traversal {
         while(!vertexStack.isEmpty()){
             char topVertex = vertexStack.peek();
             visited.add(topVertex);
-            int min = neighbors[0];
+            int min;
+            if(!visited.contains(graph.getLabel(neighbors[0])))
+                min = neighbors[0];
+            else{
+                for(int i = 0;i < neighbors.length;i++){
+                    if(!visited.contains(graph.getLabel(neighbors[i]))) {
+                        min = neighbors[i];
+                        break;
+                    }
+                }
+            }
             for(int i = 1; i < neighbors.length; i++){
                 if(neighbors[i] < min)
                     if(!visited.contains(graph.getLabel(neighbors[i])))
