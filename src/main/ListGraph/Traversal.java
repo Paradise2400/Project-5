@@ -14,21 +14,25 @@ public class Traversal {
         while(!vertexStack.isEmpty()){
             char topVertex = vertexStack.peek();
             visited.add(topVertex);
-            int min;
-            if(!visited.contains(graph.getLabel(neighbors[0])))
-                min = neighbors[0];
+            int min = 0;
+            if(neighbors.length == 0)
+                vertexStack.pop();
             else{
-                for(int i = 0;i < neighbors.length;i++){
-                    if(!visited.contains(graph.getLabel(neighbors[i]))) {
-                        min = neighbors[i];
-                        break;
+                if(!visited.contains(graph.getLabel(neighbors[0])))
+                    min = neighbors[0];
+                else{
+                    for(int i = 0;i < neighbors.length;i++){
+                        if(!visited.contains(graph.getLabel(neighbors[i]))) {
+                            min = neighbors[i];
+                            break;
+                        }
                     }
                 }
-            }
-            for(int i = 1; i < neighbors.length; i++){
-                if(neighbors[i] < min)
-                    if(!visited.contains(graph.getLabel(neighbors[i])))
-                        min = neighbors[i];
+                for(int i = 1; i < neighbors.length; i++) {
+                    if (neighbors[i] < min)
+                        if (!visited.contains(graph.getLabel(neighbors[i])))
+                            min = neighbors[i];
+                }
             }
             if(!visited.contains(graph.getLabel(min))){
                 neighbors = graph.neighbors(min);
@@ -36,8 +40,6 @@ public class Traversal {
                 traversalOrder.enqueue(graph.getLabel(min));
             }
             else
-                vertexStack.pop();
-            if(neighbors.length == 0)
                 vertexStack.pop();
             }
         return traversalOrder;
