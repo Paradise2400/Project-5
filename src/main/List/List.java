@@ -14,6 +14,7 @@ public class List<T> {
 
     public List(T[] array) {
         //go backwards because privateAdd() and add() add to front
+        firstNode = null;
         length = array.length;
         for (int i = length - 1; i >= 0; i--) {
             privateAdd(array[i]);

@@ -6,6 +6,44 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ListTest {
+
+    /*
+    Constructor tests 
+    no array constructor (default)
+    empty array with array constructor
+    filled array with array constructor
+    */
+    @Test
+    void testConstructor1() {
+        List<Boolean> testList = new List<Boolean>();
+        //first node = null
+        //length = 0
+        assertEquals(0, testList.length());
+        assertNull(testList.getEntry(0));
+        assertNull(testList.getEntry(1));
+    }
+    @Test
+    void testConstructor2() {
+        List<Boolean> testList = new List<Boolean>(new Boolean[] {});
+        //first node = null
+        //length = 0
+        assertEquals(0, testList.length());
+        assertNull(testList.getEntry(0));
+        assertNull(testList.getEntry(1));
+    }
+    @Test 
+    void testConstructor3() {
+        List<Boolean> testList = new List<Boolean>(new Boolean[] {true, false, true, false});
+        //first node = (true | (false | (true | (false | null)))) aka (true | node2)
+        //length = 4
+        assertEquals(4, testList.length());
+        assertEquals(true, testList.getEntry(0));
+        assertEquals(false, testList.getEntry(1));
+        assertEquals(true, testList.getEntry(2));
+        assertEquals(false, testList.getEntry(3));
+        assertNull(testList.getEntry(4));
+    }
+
     /*
     List.lenghth() tests
     0 in list (0)
