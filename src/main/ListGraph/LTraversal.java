@@ -3,9 +3,9 @@ package main.ListGraph;
 import main.List.List;
 
 public class LTraversal {
-    public QueueInterface<Character> depthFirst(ListGraph<Character> graph){
+    public static QueueInterface<Character> depthFirst(ListGraph<Character> graph){
         //Create Queue (holds labels),Stack (holds vertices) and Visited list (holds vertices)
-        QueueInterface<Character> traversalOrder = new LinkedQueue<Character>();
+        QueueInterface<Character> traversalOrder = new ArrayQueue<Character>();
         StackInterface<Integer> vertexStack = new ResizableArrayStack<>(300);
         List<Integer> visited = new List<>();
         //Get label for starting place and push to stack and queue
