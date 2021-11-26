@@ -13,7 +13,7 @@ public interface GraphInterface<T> {
      * Removes a vertex
      * @param vertex The index of the vertex
      */
-    public boolean removeVertex(int vertex);
+    public T removeVertex(int vertex);
 
     /**
      * Return whether or not the source node has an edge to the target node

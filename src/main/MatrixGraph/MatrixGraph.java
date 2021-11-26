@@ -43,9 +43,11 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * Removes a vertex
      * @param vertex The index of the vertex
      */
-    public boolean removeVertex(int vertex){
+    public T removeVertex(int vertex){
         //within bounds
-        if (vertex < edges.length) return false;
+        if (vertex >= edges.length) return null;
+        if (vertex < 0) return null;
+        T data = labels[vertex];
         //remove the vertex at index vertex
         boolean[][] tempEdges = new boolean[edges.length - 1][edges.length - 1];
         T[] tempLabels = (T[]) new Object[labels.length - 1];
@@ -74,7 +76,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         }
         edges = tempEdges;
         labels = tempLabels;
-        return true;
+        return data;
     }
 
     /**
@@ -84,7 +86,11 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * @return Whether the source has an edge to the target node
      */
     public boolean isEdge(int source, int target){
-        return edges[source][target];
+        try {
+            return edges[source][target];
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -94,7 +100,8 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * @return Whether the edge has been added
      */
     public boolean addEdge(int source, int target){
-        if (source >= edges.length && target >= edges.length) return false;
+        if (source >= edges.length || target >= edges.length) return false;
+        if (source < 0 || target < 0) return false;
         if (edges[source][target] == true) return false;
         edges[source][target] = true;
         return true;
@@ -107,7 +114,8 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * @return Whether the edge has been removed
      */
     public boolean removeEdge(int source, int target){
-        if (source >= edges.length && target >= edges.length) return false;
+        if (source >= edges.length || target >= edges.length) return false;
+        if (source < 0 || target < 0) return false;
         if (edges[source][target] == false) return false;
         edges[source][target] = false;
         return true;
@@ -122,7 +130,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         int i; //index of edges[vertex]
         int k; //length of neighbors and then index
         int[] neighbors; //return array
-        for (k = 0, i = 0; i < edges[vertex].length; i++) k++;
+        for (k = 0, i = 0; i < edges[vertex].length; i++) if (edges[vertex][i]) k++;
 
         neighbors = new int[k];
         for (k = 0, i = 0; i < edges[vertex].length; i++) {
@@ -140,7 +148,11 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * @return The label of the vertex
      */
     public T getLabel(int vertex){
-        return labels[vertex];
+        try {
+            return labels[vertex];
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
@@ -150,7 +162,8 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * @return Whether the label has been set
      */
     public boolean setLabel(int vertex, T newLabel){
-        if (vertex < edges.length) return false;
+        if (vertex >= edges.length) return false;
+        if (vertex < 0) return false;
         labels[vertex] = newLabel;
         return true;
     }

@@ -74,7 +74,6 @@ public class List<T> {
             posNode = new Node<T>(newEntry, posNode);
             length++;
         }
-        length++;
         return true;
     }
 
@@ -84,13 +83,32 @@ public class List<T> {
      * @return The removed entry
      */
     public T remove(int givenPosition){
-        if (givenPosition >= length) return null;
+        T data;
+
+        //set list[givenPosition - 1].next to list[givenPosition].next
+        //unless there is only one element in the list
+        //0 <= givenPosition < length
         if (givenPosition < 0) return null;
-        Node<T> posNode = firstNode;
-        for (int i = 0; i < givenPosition; i++) posNode = posNode.next;
-        T retData = posNode.data;
-        posNode = posNode.next;
-        return retData;
+        if (givenPosition >= length) return null;
+
+        if (givenPosition == 0) {
+            //remove first, get first.next
+            //if length == 1, works as well: firstNode.next == null
+            data = firstNode.data;
+            firstNode = firstNode.next;
+        } else {
+            //gP > 0 and length > 1
+            Node<T> givenPositionNode;
+            Node<T> previousNode = firstNode;
+            //iterate previousNode right up to before given
+            for (int i = 0; i < givenPosition - 1; i++) previousNode = previousNode.next;
+            givenPositionNode = previousNode.next;
+            data = givenPositionNode.data;
+            previousNode.next = givenPositionNode.next;
+        }
+
+        length--;
+        return data;
     }
 
     /**

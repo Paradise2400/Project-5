@@ -146,21 +146,27 @@ public class ListTest {
     void testRemove1() {
         List<Boolean> testList = new List<Boolean>(new Boolean[] {false, false, false, false, false});
         assertNull(testList.remove(-1));
+        assertEquals(5, testList.length());
     }
     @Test
     void testRemove2() {
         List<Boolean> testList = new List<Boolean>(new Boolean[] {true, false, true, false, true});
         assertEquals(true, testList.remove(0));
+        assertEquals(false, testList.getEntry(0));
+        assertEquals(4, testList.length());
     }
     @Test
     void testRemove3() {
         List<Boolean> testList = new List<Boolean>(new Boolean[] {true, false, true, false, true});
-        assertEquals(true, testList.remove(2));
+        assertEquals(false, testList.remove(1));
+        assertEquals(true, testList.getEntry(0));
+        assertEquals(4, testList.length());
     }
     @Test
     void testRemove4() {
         List<Boolean> testList = new List<Boolean>(new Boolean[] {false, false, false, false, false});
         assertNull(testList.remove(testList.length()  + 3));
+        assertEquals(5, testList.length());
     }
 
     /*

@@ -17,25 +17,38 @@ public class ListGraph<T> implements GraphInterface<T>{
      * Creates a number of unconnected, null-labeled vertex
      */
     public boolean addVertices(int number){
-        for (int i = 0; i < number; i++) edges.add(new List<Integer>());
+        for (int i = 0; i < number; i++) {
+            edges.add(new List<Integer>());
+            labels.add(null);
+        }
         return true;
     }
 
     /**
      * Removes a vertex
      * @param vertex The index of the vertex
+     * @return The removed vertex's label
      */
-    public boolean removeVertex(int vertex){
-        if (labels.remove(vertex) == null) return false;
-        if (edges.remove(vertex) == null) return false;
-        if (vertex >= edges.length()) return false;
+    public T removeVertex(int vertex){
+        if (vertex < 0) return null;
+        if (vertex >= size()) return null;
+        //pop label
+        T data = labels.remove(vertex);
+        //remove vertex list
+        edges.remove(vertex);
+        //remove number from vertex list; if number is greater: decrement entry
         for (int i = 0; i < edges.length(); i++) {
-            List<Integer> curList = edges.getEntry(i);
-            for (int k = 0; k < curList.length(); k++) {
-                if (curList.getEntry(k) == vertex) curList.remove(k);
+            List<Integer> entry = edges.getEntry(i);
+            for (int k = 0; k < entry.length(); k++) {
+                int edge = entry.getEntry(k);
+                if (edge == vertex) {
+                    entry.remove(k);
+                } else if (edge > vertex) {
+                    entry.replace(k, edge - 1);
+                }
             }
         }
-        return true;
+        return data;
     }
 
     /**
@@ -68,8 +81,13 @@ public class ListGraph<T> implements GraphInterface<T>{
      * @param target The node the edge to be removed is to
      */
     public boolean removeEdge(int source, int target){
-        if (isEdge(source, target)) 
-            return (edges.getEntry(source).remove(target) != null);
+        if (isEdge(source, target)) {
+            List<Integer> sourceEntry = edges.getEntry(source);
+            for (int i = 0; i < sourceEntry.length(); i++) {
+                if (sourceEntry.getEntry(i) == target) sourceEntry.remove(i);
+            }
+            return true;
+        }
         return false;
     }
 
@@ -81,9 +99,9 @@ public class ListGraph<T> implements GraphInterface<T>{
     public int[] neighbors(int vertex){
         List<Integer> neighbors = edges.getEntry(vertex);
         int[] retArray = new int[neighbors.length()];
-        for (int i = 0; i < retArray.length; i++) {
+        for (int i = neighbors.length() - 1; i >= 0; i--) {
             //this is incredibly inefficient ////////////////// OPTIMIZE
-            retArray[i] = neighbors.getEntry(i);
+            retArray[neighbors.length() - i - 1] = neighbors.getEntry(i);
         }
         return retArray;
     }
@@ -109,9 +127,11 @@ public class ListGraph<T> implements GraphInterface<T>{
     /**
      * Return the number of vertices in the graph
      * @return The number of vertices in the graph
+     * @throws Exception
      */
     public int size(){
-        return edges.length();
+        if (labels.length() != edges.length()) return -1;
+        return labels.length();
     }
 
     /**
@@ -121,12 +141,15 @@ public class ListGraph<T> implements GraphInterface<T>{
     public String toString() {
         String s = "";
         for (int i = 0; i < edges.length(); i++) {
+            List<Integer> entry = edges.getEntry(i);
             s += "Vertex " + getLabel(i) + " has edges to ";
-            s += edges.getEntry(i).getEntry(0);
-            for (int k = 1; k < edges.getEntry(i).length(); k++) {
-                s += ", ";
-                s += getLabel(k);
-                if (k == edges.getEntry(i).length() - 1) s += " and";
+            if (entry.length() == 0) {
+                s += "no other vertices.\n";
+                continue;
+            }
+            for (int k = 0; k < entry.length(); k++) {
+                s += "" + labels.getEntry(entry.getEntry(k));
+                if (k < entry.length() - 1) s += ", ";
             }
             s += ".\n";
         }
