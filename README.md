@@ -1,5 +1,5 @@
 # Project-5
-Graph Traversal
+Graph Traversal\
 Nick Karle: nakarle -  Implemented Adjacency List and Adjacency Matrix and unit tested his implemented methods, contributed to JavaDoc\
 Kevin Hoang: kevinhoang0 - Implemented Depth First Search and unit tested his methods, contributed to JavaDoc\
 Muhammed Zahid Kamil: ZahidKamil - Implemented Main, Breadth First Search, added JavaDoc\
