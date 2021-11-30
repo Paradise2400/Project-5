@@ -3,6 +3,9 @@ package main;
 import main.MatrixGraph.MatrixGraph;
 import main.ListGraph.ListGraph;
 
+/**
+ * Creates a graph as provided in the project description with a 2d boolean array
+ */
 public class GraphCreation {
     
     public static MatrixGraph<Character> createGivenMatrixGraph() {

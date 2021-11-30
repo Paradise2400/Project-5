@@ -5,6 +5,9 @@ import main.MatrixGraph.MatrixGraph;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing the methods of the 2D boolean array graph
+ */
 public class MatrixGraphTest {
         
     /*

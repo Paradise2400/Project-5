@@ -1,9 +1,6 @@
 package main.ListGraph;
 /**
-   An interface for the ADT queue.   
-   @author Frank M. Carrano
-   @author Timothy M. Henry
-   @version 5.0
+   An interface for the ADT queue.
 */
 public interface QueueInterface<T>
 {

@@ -7,6 +7,9 @@ import main.MatrixGraph.MatrixGraph;
 import main.ListGraph.ListGraph;
 import main.GraphCreation;
 
+/**
+ * Testing the linked list graph and 2D array graph that were implemented
+ */
 public class MainTest {
     @Test
     void createMatrixGraphTest() {

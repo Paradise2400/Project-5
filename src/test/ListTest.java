@@ -5,6 +5,9 @@ import main.List.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing the methods of a linked list
+ */
 public class ListTest {
 
     /*

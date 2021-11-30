@@ -3,6 +3,10 @@ package main.ListGraph;
 import main.List.List;
 import main.GraphInterface;
 
+/**
+ * A class that implements a graph in th Adjacency List
+ * @param <T> any inherited object from superclass Object
+ */
 public class ListGraph<T> implements GraphInterface<T>{
 
     List<List<Integer>> edges;

@@ -1,9 +1,6 @@
 package main.ListGraph;
 /**
    An interface for the ADT stack.
-   @author Frank M. Carrano
-   @author Timothy M. Henry
-   @version 5.0
 */
 public interface StackInterface<T>
 {

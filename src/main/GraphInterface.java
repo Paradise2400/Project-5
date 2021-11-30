@@ -1,7 +1,10 @@
 package main;
 
 
-
+/**
+ * Interface of Graph for both array type and linked list.
+ * @param <T> of any class inherited from superclass Object
+ */
 public interface GraphInterface<T> {
 
     /**

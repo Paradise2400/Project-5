@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing methods of list that were created
+ */
 public class ListGraphTest {
     
     /*

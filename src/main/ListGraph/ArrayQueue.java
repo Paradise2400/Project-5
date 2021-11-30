@@ -1,9 +1,6 @@
 package main.ListGraph;
 /**
    A class that implements a queue of objects by using an array.
-   @author Frank M. Carrano
-   @author Timothy M. Henry
-   @version 5.0
 */
 public final class ArrayQueue<T> implements QueueInterface<T>
 {

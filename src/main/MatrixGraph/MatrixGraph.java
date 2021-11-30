@@ -3,6 +3,10 @@ package main.MatrixGraph;
 import java.util.Arrays;
 import main.GraphInterface;
 
+/**
+ * Class that implements the methods 2 dimensional boolean array for creating a graph
+ * @param <T> of any inherited class from superclass Object
+ */
 public class MatrixGraph<T> implements GraphInterface<T>{
     
     //edges[i][j] is true if there is an edge from node i to node j
